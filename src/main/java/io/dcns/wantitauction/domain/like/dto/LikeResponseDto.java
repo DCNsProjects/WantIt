@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 public class LikeResponseDto {
 
     private Long userId;
-    private Long auctionId;
+    private Long auctionItemId;
     private boolean liked;
 
-    public LikeResponseDto(Long userId, Long auctionId, boolean liked) {
+    public LikeResponseDto(Long userId, Long auctionItemId, boolean liked) {
         this.userId = userId;
-        this.auctionId = auctionId;
+        this.auctionItemId = auctionItemId;
         this.liked = liked;
     }
 }

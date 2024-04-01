@@ -24,10 +24,11 @@ public class Like {
     private Long userId;
 
     @Column(nullable = false)
-    private Long auctionId;
-    public Like(User user, Long auctionitemId) {
+    private Long auctionItemId;
+
+    public Like(User user, Long auctionItemId) {
         this.userId = user.getUserId();
-        this.auctionId = auctionitemId;
+        this.auctionItemId = auctionItemId;
     }
 }
 

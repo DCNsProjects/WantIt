@@ -7,7 +7,7 @@ import io.dcns.wantitauction.domain.like.entity.Like;
 import io.dcns.wantitauction.domain.like.repository.LikeRepository;
 import io.dcns.wantitauction.domain.user.entity.User;
 import io.dcns.wantitauction.domain.user.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
+import io.dcns.wantitauction.global.exception.UserNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -41,22 +41,20 @@ public class LikeService {
 
     public List<LikeResponseDto> getlikedAuctionItem(Long userId) {
         User user = getUser(userId);
-        List<Like> likedAuctionItemList = likeRepository.findAllByUserId(user.getUserId())
-            .orElseThrow((() -> new NoSuchElementException("찜한 경매상품을 찾을 수 없습니다.")));
+        List<Like> likedAuctionItemList = likeRepository.findAllByUserId(user.getUserId());
 
         return likedAuctionItemList.stream().map(
-                like -> new LikeResponseDto(user.getUserId(), like.getAuctionId(), true))
+                like -> new LikeResponseDto(user.getUserId(), like.getAuctionItemId(), true))
             .collect(Collectors.toList());
     }
 
     private AuctionItem validateAuctionItem(Long auctionitemId) {
-        AuctionItem auctionItem = auctionItemRepository.findById(auctionitemId).orElseThrow(
+        return auctionItemRepository.findById(auctionitemId).orElseThrow(
             () -> new NoSuchElementException("해당 경매상품을 찾을 수 없습니다."));
-        return auctionItem;
     }
 
     private User getUser(Long userId) {
         return userRepository.findByUserId(userId)
-            .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 사용자입니다."));
+            .orElseThrow(() -> new UserNotFoundException("존재하지 않는 사용자입니다."));
     }
 }

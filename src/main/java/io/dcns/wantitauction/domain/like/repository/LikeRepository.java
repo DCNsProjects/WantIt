@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
 
-    Optional<List<Like>> findAllByUserId(Long userId);
+    List<Like> findAllByUserId(Long userId);
     Optional<Like> findByAuctionIdAndUserId(Long auctionitemId, Long userId);
 }

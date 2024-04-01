@@ -33,7 +33,7 @@ public class LikeController {
         return ResponseDto.of(HttpStatus.OK, likeResponseDto);
     }
 
-    @GetMapping("likes")
+    @GetMapping("/likes")
     public ResponseEntity<ResponseDto<List<LikeResponseDto>>> getlikeAuctionItem(
         @AuthenticationPrincipal UserDetailsImpl userDetails) {
         List<LikeResponseDto> likeResponseDtolist = likeService.getlikedAuctionItem(
@@ -42,3 +42,4 @@ public class LikeController {
         return ResponseDto.of(HttpStatus.OK, likeResponseDtolist);
     }
 }
+
