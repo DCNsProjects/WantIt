@@ -8,13 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LikeResponseDto {
 
-    private Long likeId;
     private Long userId;
     private Long auctionId;
     private boolean liked;
 
-    public LikeResponseDto(Long likeId, Long userId, Long auctionId, boolean liked) {
-        this.likeId = likeId;
+    public LikeResponseDto(Long userId, Long auctionId, boolean liked) {
         this.userId = userId;
         this.auctionId = auctionId;
         this.liked = liked;

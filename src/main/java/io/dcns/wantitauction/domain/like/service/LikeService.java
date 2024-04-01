@@ -31,13 +31,11 @@ public class LikeService {
         if (alreadyLiked.isPresent()) {
             Like like = alreadyLiked.get();
             likeRepository.delete(like);
-            return new LikeResponseDto(alreadyLiked.get().getLikeId(), user.getUserId(),
-                auctionItem.getAuctionItemId(), false);
+            return new LikeResponseDto(user.getUserId(), auctionItem.getAuctionItemId(), false);
         } else {
             Like like = new Like(user, auctionitemId);
             likeRepository.save(like);
-            return new LikeResponseDto(like.getLikeId(), user.getUserId(),
-                auctionItem.getAuctionItemId(), true);
+            return new LikeResponseDto(user.getUserId(), auctionItem.getAuctionItemId(), true);
         }
     }
 
@@ -47,8 +45,7 @@ public class LikeService {
             .orElseThrow((() -> new NoSuchElementException("찜한 경매상품을 찾을 수 없습니다.")));
 
         return likedAuctionItemList.stream().map(
-                like -> new LikeResponseDto(
-                    like.getLikeId(), user.getUserId(), like.getAuctionId(), true))
+                like -> new LikeResponseDto(user.getUserId(), like.getAuctionId(), true))
             .collect(Collectors.toList());
     }
 
