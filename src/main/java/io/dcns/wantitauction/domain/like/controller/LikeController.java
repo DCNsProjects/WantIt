@@ -4,10 +4,12 @@ import io.dcns.wantitauction.domain.like.dto.LikeResponseDto;
 import io.dcns.wantitauction.domain.like.service.LikeService;
 import io.dcns.wantitauction.global.dto.ResponseDto;
 import io.dcns.wantitauction.global.impl.UserDetailsImpl;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,22 +24,21 @@ public class LikeController {
 
     @PostMapping("/{auctionitemId}/likes")
     public ResponseEntity<ResponseDto<LikeResponseDto>> likeAuctionItem(
-        @PathVariable Long auctionitemId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        @PathVariable Long auctionitemId, @AuthenticationPrincipal UserDetailsImpl userDetails
+    ) {
+        LikeResponseDto likeResponseDto = likeService.likeAuctionItem(
+            auctionitemId, userDetails.getUser()
+        );
 
-        LikeResponseDto likeResponseDto = likeService.likeAuctionItem(auctionitemId,
-            userDetails.getUser());
         return ResponseDto.of(HttpStatus.OK, likeResponseDto);
     }
 
-//    @GetMapping("likes")
-//    public ResponseEntity<ResponseDto<List<LikeResponseListDto>>> getlikeAuctionItem(@AuthenticationPrincipal UserDetailsImpl userDetails){
-//        List<LikeResponseListDto> likeResponseDto = likeService.getlikedAuctionItem(userDetails.getUser().getUserId());
-//
-//        return ResponseDto.of(HttpStatus.OK, likeResponseDto);
-//
-//    }
+    @GetMapping("likes")
+    public ResponseEntity<ResponseDto<List<LikeResponseDto>>> getlikeAuctionItem(
+        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        List<LikeResponseDto> likeResponseDtolist = likeService.getlikedAuctionItem(
+            userDetails.getUser().getUserId());
 
-
-
-
+        return ResponseDto.of(HttpStatus.OK, likeResponseDtolist);
+    }
 }

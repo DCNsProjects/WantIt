@@ -18,7 +18,5 @@ public class LikeResponseDto {
         this.userId = userId;
         this.auctionId = auctionId;
         this.liked = liked;
-
     }
-
 }
