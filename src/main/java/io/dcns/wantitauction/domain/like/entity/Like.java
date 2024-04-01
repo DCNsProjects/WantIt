@@ -1,5 +1,6 @@
 package io.dcns.wantitauction.domain.like.entity;
 
+import io.dcns.wantitauction.domain.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,4 +25,17 @@ public class Like {
 
     @Column(nullable = false)
     private Long auctionId;
+
+    private Integer count;
+
+    public Like(User user, Long auctionitemId) {
+        this.userId = user.getUserId();
+        this.auctionId = auctionitemId;
+    }
+
+    public void addCount(Integer count) {
+        this.count = this.count + count;
+    }
 }
+
+
