@@ -25,16 +25,9 @@ public class Like {
 
     @Column(nullable = false)
     private Long auctionId;
-
-    private Integer count;
-
     public Like(User user, Long auctionitemId) {
         this.userId = user.getUserId();
         this.auctionId = auctionitemId;
-    }
-
-    public void addCount(Integer count) {
-        this.count = this.count + count;
     }
 }
 
