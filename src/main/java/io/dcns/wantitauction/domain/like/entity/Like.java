@@ -27,10 +27,15 @@ public class Like {
     private Long auctionItemId;
 
     @Column
-    private boolean liked;
+    private boolean isLiked;
 
     public Like(User user, Long auctionItemId) {
         this.userId = user.getUserId();
         this.auctionItemId = auctionItemId;
+        this.isLiked = true;
+    }
+
+    public void updateLikedStatus() {
+        this.isLiked = !this.isLiked;
     }
 }
