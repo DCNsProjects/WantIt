@@ -38,7 +38,7 @@ jobs:
 
       - name: Make FCM SDK
         run: |
-          cd ./src/main/resources/firebase
+          cd ./src/main/resources
           touch ./firebase-adminSDK.json
           echo "${{ secrets.ADMIN_SDK }}" >> ./firebase-adminSDK.json
         shell: bash
