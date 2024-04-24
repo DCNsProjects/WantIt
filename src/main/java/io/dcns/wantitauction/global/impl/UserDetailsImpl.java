@@ -1,21 +1,32 @@
 package io.dcns.wantitauction.global.impl;
 
 
+import io.dcns.wantitauction.domain.user.entity.User;
+import io.dcns.wantitauction.domain.user.entity.UserRoleEnum;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private Long userId;
+    private final User user;
+    public UserDetailsImpl(User user) {
+        this.user = user;
+    }
 
-    public Long getUserId() {
-        return this.userId;
+    public User getUser() {
+        return user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(
+            UserRoleEnum.USER.getAuthority());
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(simpleGrantedAuthority);
+        return authorities;
     }
 
     @Override
@@ -30,21 +41,21 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
