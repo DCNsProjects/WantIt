@@ -36,13 +36,6 @@ jobs:
           echo "${{ secrets.APPLICATION_YML }}" >> ./application.yml
         shell: bash
 
-      - name: Make FCM SDK
-        run: |
-          cd ./src/main/resources
-          touch ./firebase-adminSDK.json
-          echo "${{ secrets.ADMIN_SDK }}" >> ./firebase-adminSDK.json
-        shell: bash
-
       - name: Build with Gradle
         run: ./gradlew clean bootJar
 
