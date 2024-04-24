@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Slf4j(topic = "FCMInitializer")
 public class FCMInitializer {
 
-    private static final String FIREBASE_CONFIG_PATH = "firebase/firebase-adminSDK.json";
+    private static final String FIREBASE_CONFIG_PATH = "/firebase-adminSDK.json";
 
     @PostConstruct
     public void initialize() {
