@@ -69,6 +69,9 @@ public class AuctionItem extends Timestamped {
     @Column
     private LocalDateTime deletedAt;
 
+    @Column
+    private String imageUrl;
+
     public AuctionItem(CreateProductRequestDto request, User user) {
         this.userId = user.getUserId();
         this.itemName = request.getItemName();

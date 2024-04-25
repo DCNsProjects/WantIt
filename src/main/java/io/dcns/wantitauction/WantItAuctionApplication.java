@@ -12,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 public class WantItAuctionApplication {
 
+    static {
+        System.setProperty("com.amazonaws.sdk.disableEc2Metadata", "true");
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(WantItAuctionApplication.class, args);
     }

@@ -1,4 +1,4 @@
-package io.dcns.wantitauction.global.aws.s3;
+package io.dcns.wantitauction.global.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
