@@ -1,7 +1,5 @@
 package io.dcns.wantitauction.domain.auctionItem.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import io.dcns.wantitauction.domain.auctionItem.entity.AuctionItemEnum;
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -14,12 +12,8 @@ public class CreateProductRequestDto {
     private String itemName;
     private String itemDescription;
     private Long minPrice;
-
-    @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+    private String category;
     private LocalDateTime startDate;
-
-    @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime endDate;
-
     private final AuctionItemEnum status = AuctionItemEnum.READY;
 }

@@ -55,6 +55,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/v1/auction-items").permitAll()
                 .requestMatchers("/v1/auction-items/finished").permitAll()
                 .requestMatchers("/v1/auction-items/{auctionItemId}/finished").permitAll()
+                .requestMatchers("/v1/auction-items/bids/top3").permitAll()
+                .requestMatchers("/v1/auction-items/{auctionItemId}/bids/top").permitAll()
                 // 카카오 로그인
                 .requestMatchers("/").permitAll()
                 .requestMatchers("/v1/users/kakao/callback").permitAll()
@@ -63,6 +65,7 @@ public class WebSecurityConfig {
                 // 이메일 인증
                 .requestMatchers("v1/users/emails/authcode").permitAll()
                 .requestMatchers("v1/users/emails/authcode/verify").permitAll()
+                .requestMatchers("/v1/live-bids/auction-items/{auctionItemId}").permitAll()
                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 

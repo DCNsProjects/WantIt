@@ -1,35 +1,26 @@
 package io.dcns.wantitauction.domain.bid.dto;
 
 import io.dcns.wantitauction.domain.bid.entity.Bid;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class BidResponseDto {
+public class TopBidResponseDto {
 
     private Long bidId;
-
     private Long auctionItemId;
-
-    private String itemName;
-
-    private Long userId;
-
     private Long bidPrice;
 
-    private LocalDateTime createdAt;
+    public TopBidResponseDto(Long bidId, Long auctionItemId, Long bidPrice) {
+        this.bidId = bidId;
+        this.auctionItemId = auctionItemId;
+        this.bidPrice = bidPrice;
+    }
 
-    private LocalDateTime updatedAt;
-
-    public BidResponseDto(Bid bid) {
+    public TopBidResponseDto(Bid bid) {
         this.bidId = bid.getBidId();
         this.auctionItemId = bid.getAuctionItem().getAuctionItemId();
-        this.itemName = bid.getAuctionItem().getItemName();
-        this.userId = bid.getUserId();
         this.bidPrice = bid.getBidPrice();
-        this.createdAt = bid.getCreatedAt();
-        this.updatedAt = bid.getUpdatedAt();
     }
 }
