@@ -37,7 +37,7 @@ public class MyAuctionItemController {
 
     @PostMapping
     public ResponseEntity<ResponseDto<Void>> createAuctionItem(
-        @Valid @RequestBody CreateProductRequestDto request,
+        @Valid @RequestPart("requestBody") CreateProductRequestDto request,
         @AuthenticationPrincipal UserDetailsImpl userDetails,
         @RequestPart("file") MultipartFile file
     ) {
