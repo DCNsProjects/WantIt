@@ -1,10 +1,8 @@
 package io.dcns.wantitauction.domain.aws.service;
 
 import com.amazonaws.SdkBaseException;
-import com.amazonaws.services.s3.AmazonS3;
 import io.dcns.wantitauction.domain.aws.repository.AmazonS3Repository;
 import io.dcns.wantitauction.global.utils.MultiPartUtils;
-import java.io.File;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;

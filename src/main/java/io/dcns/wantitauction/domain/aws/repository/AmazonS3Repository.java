@@ -21,7 +21,6 @@ public class AmazonS3Repository {
 
     private final AmazonS3 amazonS3;
     private final String bucketName = "wantit-bucket";
-    private final String region = "ap-northeast-2";
 
     public String store(String fullPath, MultipartFile file) {
         File localFile = new File(MultiPartUtils.getLocalHomeDirectory(), fullPath);
