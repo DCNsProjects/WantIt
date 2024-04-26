@@ -29,28 +29,11 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
 
-      - name: Set yml file
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: ${{ env.RESOURCE_PATH }}
-        env:
-            EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
-            EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-            DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-            MYSQL_USERNAME: ${{ secrets.MYSQL_USERNAME }}
-            MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-            JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-            GRANT_TYPE: ${{ secrets.GRANT_TYPE }}
-            CLIENT_ID: ${{ secrets.CLIENT_ID }}
-            REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
-            AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-            AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-
-      - name: Make FCM SDK
+      - name: Setting yml file
         run: |
-          cd ./src/main/resources/firebase
-          touch ./firebase-adminSDK.json
-          echo "${{ secrets.ADMIN_SDK }}" >> ./firebase-adminSDK.json
+          cd ./src/main/resources
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_YML }}" >> ./application.yml
         shell: bash
 
       - name: Build with Gradle
