@@ -1,20 +1,23 @@
 package io.dcns.wantitauction.domain.auctionItem.service;
 
+import static io.dcns.wantitauction.domain.auctionItem.entity.CategoryEnum.WATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 import io.dcns.wantitauction.domain.auctionItem.dto.AuctionItemPageableResponseDto;
 import io.dcns.wantitauction.domain.auctionItem.dto.AuctionItemResponseDto;
 import io.dcns.wantitauction.domain.auctionItem.dto.FinishedItemPageableResponseDto;
 import io.dcns.wantitauction.domain.auctionItem.dto.FinishedItemResponseDto;
+import io.dcns.wantitauction.domain.auctionItem.dto.InProgressItemPageableResponseDto;
+import io.dcns.wantitauction.domain.auctionItem.dto.InProgressItemResponseDto;
 import io.dcns.wantitauction.domain.auctionItem.dto.ReadyItemPageableResponseDto;
 import io.dcns.wantitauction.domain.auctionItem.dto.ReadyItemResponseDto;
 import io.dcns.wantitauction.domain.auctionItem.entity.AuctionItem;
 import io.dcns.wantitauction.domain.auctionItem.entity.AuctionItemEnum;
-import io.dcns.wantitauction.domain.auctionItem.entity.CategoryEnum;
 import io.dcns.wantitauction.domain.auctionItem.repository.AuctionItemQueryRepository;
 import io.dcns.wantitauction.domain.auctionItem.repository.AuctionItemRepository;
 import java.time.LocalDateTime;
@@ -53,7 +56,7 @@ class AuctionItemServiceTest {
             //given
             AuctionItem testItem = new AuctionItem(
                 1L, 1L, null, "Test Item",
-                "itemDescription", CategoryEnum.WATCH, 100000L, 110000L,
+                "itemDescription", WATCH, 100000L, 110000L,
                 LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.READY, null
             );
             given(auctionItemRepository.findById(anyLong())).willReturn(Optional.of(testItem));
@@ -92,7 +95,7 @@ class AuctionItemServiceTest {
             Pageable pageable = PageRequest.of(page, size);
             testItem = new AuctionItem(
                 1L, 1L, null, "Test Item",
-                "itemDescription", CategoryEnum.WATCH, 100000L, 110000L,
+                "itemDescription", WATCH, 100000L, 110000L,
                 LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.READY, null
             );
             List<AuctionItemResponseDto> auctionItems = List.of(
@@ -123,7 +126,7 @@ class AuctionItemServiceTest {
             //given
             AuctionItem testItem = new AuctionItem(
                 1L, 1L, null, "Test Item",
-                "itemDescription", CategoryEnum.WATCH, 100000L, 110000L,
+                "itemDescription", WATCH, 100000L, 110000L,
                 LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.FINISHED, null
             );
             given(auctionItemQueryRepository.findByIdAndFinished(anyLong()))
@@ -163,7 +166,7 @@ class AuctionItemServiceTest {
             Pageable pageable = PageRequest.of(page, size);
             testItem = new AuctionItem(
                 1L, 1L, null, "Test Item",
-                "itemDescription", CategoryEnum.WATCH, 100000L, 110000L,
+                "itemDescription", WATCH, 100000L, 110000L,
                 LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.FINISHED, null
             );
             List<FinishedItemResponseDto> auctionItems = List.of(
@@ -198,7 +201,7 @@ class AuctionItemServiceTest {
             Pageable pageable = PageRequest.of(page, size);
             testItem = new AuctionItem(
                 1L, 1L, null, "Test Item",
-                "itemDescription", CategoryEnum.WATCH, 100000L, 110000L,
+                "itemDescription", WATCH, 100000L, 110000L,
                 LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.READY, null
             );
             List<ReadyItemResponseDto> auctionItems = List.of(
@@ -220,40 +223,41 @@ class AuctionItemServiceTest {
         }
     }
 
-//    @Nested
-//    @DisplayName("진행중인 경매 상품 목록 조회")
-//    class GetInProgressListTest {
-//
-//        @Test
-//        @DisplayName("조회 성공")
-//        void getFinishedAuctionItemList() {
-//            //given
-//            int page = 0;
-//            int size = 3;
-//            Long totalSize = 1L;
-//            Pageable pageable = PageRequest.of(page, size);
-//            testItem = new AuctionItem(
-//                1L, 1L, null, "Test Item",
-//                "itemDescription",CategoryEnum.WATCH,100000L, 110000L,
-//                LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.IN_PROGRESS, null
-//            );
-//            List<InProgressItemResponseDto> auctionItems = List.of(
-//                new InProgressItemResponseDto(testItem),
-//                new InProgressItemResponseDto(testItem),
-//                new InProgressItemResponseDto(testItem)
-//            );
-//            given(auctionItemQueryRepository.findAllByInProgress(any(Pageable.class)),)
-//                .willReturn(
-//                    PageableExecutionUtils.getPage(auctionItems, pageable, () -> totalSize)
-//                );
-//            //when
-//            InProgressItemPageableResponseDto responseDtoPage = auctionItemService.getInProgressAuctionItems(
-//                page, size, category);
-//
-//            //then
-//            assertThat(responseDtoPage.getResponseDtoList().get(1).getAuctionItemId())
-//                .isEqualTo(testItem.getAuctionItemId());
-//        }
-//    }
+    @Nested
+    @DisplayName("진행중인 경매 상품 목록 조회")
+    class GetInProgressListTest {
+
+        @Test
+        @DisplayName("조회 성공")
+        void getFinishedAuctionItemList() {
+            //given
+            int page = 0;
+            int size = 3;
+            Long totalSize = 1L;
+            Pageable pageable = PageRequest.of(page, size);
+            testItem = new AuctionItem(
+                1L, 1L, null, "Test Item",
+                "itemDescription", WATCH, 100000L, 110000L,
+                LocalDateTime.now(), LocalDateTime.now(), AuctionItemEnum.IN_PROGRESS, null
+            );
+            List<InProgressItemResponseDto> auctionItems = List.of(
+                new InProgressItemResponseDto(testItem),
+                new InProgressItemResponseDto(testItem),
+                new InProgressItemResponseDto(testItem)
+            );
+            given(auctionItemQueryRepository.findAllByInProgress(
+                any(Pageable.class), eq("WATCH")))
+                .willReturn(
+                    PageableExecutionUtils.getPage(auctionItems, pageable, () -> totalSize));
+
+            //when
+            InProgressItemPageableResponseDto responseDtoPage = auctionItemService.getInProgressAuctionItems(
+                page, size, "WATCH");
+
+            //then
+            assertThat(responseDtoPage.getResponseDtoList().get(1).getAuctionItemId())
+                .isEqualTo(testItem.getAuctionItemId());
+        }
+    }
 
 }
