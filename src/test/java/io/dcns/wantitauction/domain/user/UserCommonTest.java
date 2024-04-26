@@ -22,6 +22,10 @@ public interface UserCommonTest {
     String TEST_USER_ADDRESS = "대한민구 서울 용산구";
     String TOKEN = "test-token";
 
+    int PAGE = 0;
+    int SIZE = 10;
+    int EXPECTED_TOTAL_PAGE = 1;
+
     User TEST_USER = User.builder()
         .email(TEST_USER_EMAIL)
         .password(TEST_USER_PASSWORD)
@@ -58,13 +62,13 @@ public interface UserCommonTest {
     PasswordRequestDto TEST_PASSWORD_REQUEST_DTO = PasswordRequestDto.builder()
         .password(TEST_USER_PASSWORD)
         .changePassword(ANOTHER_PREFIX + TEST_USER_PASSWORD)
-        .rechangePassword(ANOTHER_PREFIX + TEST_USER_PASSWORD)
+        .checkPassword(ANOTHER_PREFIX + TEST_USER_PASSWORD)
         .build();
 
 
     PasswordRequestDto TEST_WRONG_PASSWORD_REQUEST_DTO = PasswordRequestDto.builder()
         .password(TEST_USER_PASSWORD)
         .changePassword(ANOTHER_PREFIX + TEST_USER_PASSWORD)
-        .rechangePassword(DIFFERENT_PREFIX + TEST_USER_PASSWORD)
+        .checkPassword(DIFFERENT_PREFIX + TEST_USER_PASSWORD)
         .build();
 }

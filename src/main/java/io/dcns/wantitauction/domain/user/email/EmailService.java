@@ -4,7 +4,7 @@ import io.dcns.wantitauction.domain.user.entity.User;
 import io.dcns.wantitauction.domain.user.repository.UserRepository;
 import io.dcns.wantitauction.global.event.WinningBidEvent;
 import io.dcns.wantitauction.global.exception.UserNotFoundException;
-import io.dcns.wantitauction.global.util.RedisUtil;
+import io.dcns.wantitauction.global.redis.RedisUtil;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMessage.RecipientType;
@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +21,6 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
     private final RedisUtil redisUtil;
-    private final TemplateEngine templateEngine;
     private final UserRepository userRepository;
 
     @Value("${spring.mail.username}")  //yml에서 추출
