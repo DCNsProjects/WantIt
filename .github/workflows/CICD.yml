@@ -26,13 +26,6 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
 
-      - name: Settings yml file
-        run: |
-          cd ./src/main/resources
-          touch ./application.yml
-          echo "${{ secrets.APPLICATION }}" >> ./application.yml
-        shell: bash
-
       - name: Build with Gradle
         run: ./gradlew clean bootJar
 
