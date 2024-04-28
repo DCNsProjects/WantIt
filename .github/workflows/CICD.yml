@@ -30,11 +30,10 @@ jobs:
           distribution: 'corretto'
 
       - name: Setting yml file
-        uses: microsoft/variable-substitution@v1
         run: |
           cd ./src/main/resources
           touch ./application.yml
-          echo "${{ secrets.APPLICATION_YML }}" >> ./application.yml
+          echo "${{ secrets.APPLICATION }}" >> ./application.yml
         shell: bash
 
       - name: Build with Gradle
