@@ -30,6 +30,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Setting yml file
+        uses: microsoft/variable-substitution@v1
         run: |
           cd ./src/main/resources
           touch ./application.yml
