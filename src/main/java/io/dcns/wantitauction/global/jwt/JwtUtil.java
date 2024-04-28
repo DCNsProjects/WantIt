@@ -37,8 +37,8 @@ public class JwtUtil {
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
     private static final Integer BEARER_PREFIX_LENGTH = 7;
 
-    @Value("${jwt.secret.key}")
-    private String secretKey;
+//    @Value("${jwt.secret.key}")
+    private String secretKey = "ehdgoanfrhkqorentksdlakfmrhekfgehfhrgksmsladlqhdntktkdnflskfkakstp";
     private Key key;
 
     @PostConstruct
