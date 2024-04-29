@@ -62,12 +62,37 @@ dependencies {
     // AOP
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
-    // Redis
-//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-//    implementation 'org.redisson:redisson-spring-boot-starter:3.27.2'
+    // For NumberUtils
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
 
+    // Thymeleaf\
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.redisson:redisson-spring-boot-starter:3.27.1'
+
+    //캐시
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+    // Redis와 Spring을 통신할 수 있게 해줌.
+    implementation 'org.springframework.data:spring-data-redis:2.7.5'
+    // email
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'io.lettuce:lettuce-core:6.2.1.RELEASE'
+    implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.2'
+
+    // Firebase
+    implementation group: 'com.google.firebase', name: 'firebase-admin', version: '9.2.0'
+
+    // H2
+    testImplementation 'com.h2database:h2'
+
+    // AWS
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
