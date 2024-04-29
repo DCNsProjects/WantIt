@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - deploy
+      - deployment
 
 env:
   DOCKER_IMAGE_NAME: chilichili/wantit
@@ -30,7 +30,7 @@ jobs:
         run: |
           cd ./src/main/resources
           touch ./application.yml
-          echo "${{ secrets.APPLICATION }}" > ./application.yml
+          echo "${{ secrets.APPLICATION_YML }}" > ./application.yml
         shell: bash
 
       - name: Build with Gradle
